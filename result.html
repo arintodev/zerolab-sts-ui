@@ -75,9 +75,15 @@
                     </div>
                     <div class="relative bottom-0 left-0 right-0 text-white px-4 pb-4 pt-2">
                         <div class="max-w-7xl mx-auto relative">
-                            <div class="px-3 py-1 rounded-full bg-white text-black bold inline-flex gap-2 items-center absolute -top-10 left-0">
-                                <div class="size-3 bg-red-500 rounded-full"></div>
-                                <span>Live Now</span>
+                            <div class="flex gap-3 absolute -top-10 left-0">
+                                <div class="px-3 py-1 rounded-full bg-white text-black bold inline-flex gap-2 items-center">
+                                    <div class="size-3 bg-orange-500 rounded-full"></div>
+                                    <span>Result Pending</span>
+                                </div>
+                                <div class="px-3 py-1 rounded-full bg-white text-black bold inline-flex gap-2 items-center">
+                                    <div class="size-3 bg-green-500 rounded-full"></div>
+                                    <span>Race Finished</span>
+                                </div>
                             </div>
                             <div class="mt-4 bold text-5xl md:text-7xl">Wonosobo Altitude Run 2025</div>
                             <div class="mt-6 flex gap-2 max-w-full overflow-auto">
@@ -134,7 +140,7 @@
                                 <div>Country</div>
                                 <div>Gender</div>
                                 <div>Sub</div>
-                                <div class="col-span-2">Last Checkpoint</div>
+                                <div class="col-span-2">Time</div>
                                 <div class="col-span-2"></div>
                             </div>
                         </div>
@@ -179,7 +185,7 @@
                                 </div>
                                 <div>
                                     <div class="hidden md:block text-sm">Open</div>
-                                    <div class="bg-white mt-2 md:mt-0 px-3 py-2 rounded-lg border border-gray-200 text-sm grid grid-cols-2 gap-3 mb-2 md:hidden">
+                                    <div class="bg-white mt-2 md:mt-0 px-3 py-2 rounded-lg border border-gray-200 text-sm grid grid-cols-2 gap-3 md:hidden">
                                         <div>
                                             <div class="flex justify-between">
                                                 <div class="text-gray-500">Overall</div>
@@ -203,34 +209,17 @@
                                     </div>
                                 </div>
                                 <div class="col-span-2">
-                                    <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
-                                        <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
-                                        <div>
-                                            <div class="font-semibold md:block inline-block">
-                                                KM 10 Perantunan
-                                                <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
-                                            </div>
-                                            <div class="font-semibold md:font-normal inline-block">
-                                                <div class="inline-block">Apr 12, 2025</div>
-                                                <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
-                                            </div>
-                                            <div class="font-semibold md:font-normal inline-block">22:00:00</div>
-                                        </div>
-                                    </div>
+                                    <span class="bold md:block hidden">22:00:00</span>
                                 </div>
                                 <div class="col-span-2 float-right">
                                     <div class="flex gap-2 justify-end absolute top-4 right-4">
-                                        <div class="rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-                                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                        <div class="rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-green-600 bg-green-100 bold">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
                                             </svg>
-                                            On Race
+                                            Finished
                                         </div>
-                                        <button class="pin-btn cursor-pointer rounded-full p-2 border border-gray-200 bg-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
-                                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
-                                            </svg>
-                                        </button>
+                                        <button class="pin-btn rounded-full p-2 border border-gray-200 bg-white leading-4 md:block hidden">Certificate</button>
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +264,7 @@
                                 </div>
                                 <div>
                                     <div class="hidden md:block text-sm">Open</div>
-                                    <div class="bg-white mt-2 md:mt-0 px-3 py-2 rounded-lg border border-gray-200 text-sm grid grid-cols-2 gap-3 mb-2 md:hidden">
+                                    <div class="bg-white mt-2 md:mt-0 px-3 py-2 rounded-lg border border-gray-200 text-sm grid grid-cols-2 gap-3 md:hidden">
                                         <div>
                                             <div class="flex justify-between">
                                                 <div class="text-gray-500">Overall</div>
@@ -299,34 +288,17 @@
                                     </div>
                                 </div>
                                 <div class="col-span-2">
-                                    <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
-                                        <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
-                                        <div>
-                                            <div class="font-semibold md:block inline-block">
-                                                KM 10 Perantunan
-                                                <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
-                                            </div>
-                                            <div class="font-semibold md:font-normal inline-block">
-                                                <div class="inline-block">Apr 12, 2025</div>
-                                                <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
-                                            </div>
-                                            <div class="font-semibold md:font-normal inline-block">22:00:00</div>
-                                        </div>
-                                    </div>
+                                    <span class="bold md:block hidden">22:00:00</span>
                                 </div>
                                 <div class="col-span-2 float-right">
                                     <div class="flex gap-2 justify-end absolute top-4 right-4">
-                                        <div class="rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-                                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                        <div class="rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-green-600 bg-green-100 bold">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
                                             </svg>
-                                            On Race
+                                            Finished
                                         </div>
-                                        <button class="pin-btn cursor-pointer rounded-full p-2 border border-gray-200 bg-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
-                                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
-                                            </svg>
-                                        </button>
+                                        <button class="pin-btn rounded-full p-2 border border-gray-200 bg-white leading-4 md:block hidden">Certificate</button>
                                     </div>
                                 </div>
                             </div>
@@ -370,7 +342,7 @@
                                 </div>
                                 <div>
                                     <div class="hidden md:block text-sm">Open</div>
-                                    <div class="bg-white mt-2 md:mt-0 px-3 py-2 rounded-lg border border-gray-200 text-sm grid grid-cols-2 gap-3 mb-2 md:hidden">
+                                    <div class="bg-white mt-2 md:mt-0 px-3 py-2 rounded-lg border border-gray-200 text-sm grid grid-cols-2 gap-3 md:hidden">
                                         <div>
                                             <div class="flex justify-between">
                                                 <div class="text-gray-500">Overall</div>
@@ -394,34 +366,17 @@
                                     </div>
                                 </div>
                                 <div class="col-span-2">
-                                    <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
-                                        <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
-                                        <div>
-                                            <div class="font-semibold md:block inline-block">
-                                                KM 10 Perantunan
-                                                <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
-                                            </div>
-                                            <div class="font-semibold md:font-normal inline-block">
-                                                <div class="inline-block">Apr 12, 2025</div>
-                                                <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
-                                            </div>
-                                            <div class="font-semibold md:font-normal inline-block">22:00:00</div>
-                                        </div>
-                                    </div>
+                                    <span class="bold md:block hidden">22:00:00</span>
                                 </div>
                                 <div class="col-span-2 float-right">
                                     <div class="flex gap-2 justify-end absolute top-4 right-4 z-2">
-                                        <div class="rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-                                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                        <div class="rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-green-600 bg-green-100 bold">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
                                             </svg>
-                                            On Race
+                                            Finished
                                         </div>
-                                        <button class="pin-btn cursor-pointer rounded-full p-2 border border-gray-200 bg-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
-                                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
-                                            </svg>
-                                        </button>
+                                        <button class="pin-btn rounded-full p-2 border border-gray-200 bg-white leading-4 md:block hidden">Certificate</button>
                                     </div>
                                 </div>
                             </div>
@@ -466,7 +421,7 @@
                                 </div>
                                 <div>
                                     <div class="hidden md:block text-sm">Open</div>
-                                    <div class="bg-white mt-2 md:mt-0 px-3 py-2 rounded-lg border border-gray-200 text-sm grid grid-cols-2 gap-3 mb-2 md:hidden">
+                                    <div class="bg-white mt-2 md:mt-0 px-3 py-2 rounded-lg border border-gray-200 text-sm grid grid-cols-2 gap-3 md:hidden">
                                         <div>
                                             <div class="flex justify-between">
                                                 <div class="text-gray-500">Overall</div>
@@ -490,34 +445,17 @@
                                     </div>
                                 </div>
                                 <div class="col-span-2">
-                                    <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
-                                        <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
-                                        <div>
-                                            <div class="font-semibold md:block inline-block">
-                                                KM 10 Perantunan
-                                                <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
-                                            </div>
-                                            <div class="font-semibold md:font-normal inline-block">
-                                                <div class="inline-block">Apr 12, 2025</div>
-                                                <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
-                                            </div>
-                                            <div class="font-semibold md:font-normal inline-block">22:00:00</div>
-                                        </div>
-                                    </div>
+                                    <span class="bold md:block hidden">22:00:00</span>
                                 </div>
                                 <div class="col-span-2 float-right">
                                     <div class="flex gap-2 justify-end absolute top-4 right-4">
-                                        <div class="rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-                                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                        <div class="rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-green-600 bg-green-100 bold">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
                                             </svg>
-                                            On Race
+                                            Finished
                                         </div>
-                                        <button class="pin-btn cursor-pointer rounded-full p-2 border border-gray-200 bg-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
-                                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
-                                            </svg>
-                                        </button>
+                                        <button class="pin-btn rounded-full p-2 border border-gray-200 bg-white leading-4 md:block hidden">Certificate</button>
                                     </div>
                                 </div>
                             </div>
@@ -615,10 +553,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="mt-4">
+                                    <button class="pin-btn rounded-full p-2 border border-gray-200 leading-4 w-full bg-black text-white">Certificate</button>
+                                </div>
                                 <div class="mt-4 rounded-xl p-3 border border-gray-200">
                                     <button class="accordion-toggle flex items-center w-full" data-target="checkpoint-content">
                                         <div class="flex-grow text-left">
-                                            <div class="bold text-2xl checkpoint-title">Last Checkpoint</div>
+                                            <div class="bold text-2xl checkpoint-title">Checkpoint</div>
                                         </div>
                                         <div class="p-2 accordion-arrow">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
@@ -626,17 +567,6 @@
                                             </svg>
                                         </div>
                                     </button>
-                                    <div class="text-sm text-gray-700 checkpoint-desc">
-                                        <div class="font-semibold inline-block">
-                                            KM 10 Perantunan
-                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
-                                        </div>
-                                        <div class="font-semibold inline-block">
-                                            <div class="inline-block">Apr 12, 2025</div>
-                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
-                                        </div>
-                                        <div class="font-semibold inline-block">22:00:00</div>
-                                    </div>
                                     <div style="display: none;" id="checkpoint-content">
                                         <div class="flex flex-col mt-4 justify-center leading-4">
                                             <div class="flex justify-center h-16">
@@ -698,98 +628,6 @@
                         </div>
                     </div>
                     <!-- end: Modal Detail -->
-                    <!-- Pinned -->
-                    <div class="fixed bottom-4 right-4 pinned-participant z-12 size-fit">
-                        <div class="pinned-participant-content pl-4">
-                            <div class="pinned-participant-list">
-                                <div class="bg-white rounded-lg flex items-center gap-3 px-3 py-2 text-sm border border-gray-200 mb-1 shadow-lg">
-                                    <div class="flex gap-3 items-center">
-                                        <div class="pr-3 border-r border-gray-300 font-semibold">1</div>
-                                        <div class="font-semibold">Fajar Nugroho Susilo bambang Yudoyono</div>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
-                                        </svg>
-                                        Female
-                                    </div>
-                                    <div class="flex-none">
-                                        <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
-                                    </div>
-                                    <div>
-                                        <div class="rounded-full p-2 border border-gray-200 bg-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
-                                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bg-white rounded-lg flex items-center gap-3 px-3 py-2 text-sm border border-gray-200 mb-1 shadow-lg">
-                                    <div class="flex gap-3 items-center">
-                                        <div class="pr-3 border-r border-gray-300 font-semibold">2</div>
-                                        <div class="font-semibold">Fajar Nugroho Susilo bambang Yudoyono</div>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
-                                        </svg>
-                                        Female
-                                    </div>
-                                    <div class="flex-none">
-                                        <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
-                                    </div>
-                                    <div>
-                                        <div class="rounded-full p-2 border border-gray-200 bg-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
-                                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bg-white rounded-lg flex items-center gap-3 px-3 py-2 text-sm border border-gray-200 mb-1 shadow-lg">
-                                    <div class="flex gap-3 items-center">
-                                        <div class="pr-3 border-r border-gray-300 font-semibold">3</div>
-                                        <div class="font-semibold">Fajar Nugroho Susilo bambang Yudoyono</div>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
-                                        </svg>
-                                        Female
-                                    </div>
-                                    <div class="flex-none">
-                                        <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
-                                    </div>
-                                    <div>
-                                        <div class="rounded-full p-2 border border-gray-200 bg-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
-                                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="show-pinned pinned-toggle p-2 shadow-lg rounded-full border border-gray-200 bg-black text-white relative w-fit float-right mt-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
-                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
-                            </svg>
-                            <div class="absolute -right-2 -top-2 bg-yellow-500 text-center rounded-full text-xs p-[6px] leading-1.5 text-black">
-                                3
-                            </div>
-                        </button>
-                        <div class="hide-pinned mt-3">
-                            <button class="pinned-toggle p-2 shadow-lg rounded-full border border-gray-200 bg-white relative w-fit float-right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                                </svg>
-                            </button>
-                            <div class="w-fit float-right mr-3 mt-1">
-                                <div class="px-2 py-1 bg-yellow-500 text-white text-xs rounded-full shadow-lg">You only be able to pin 3 runners.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: pinned -->
                 </div>
             </div>
         </div>
