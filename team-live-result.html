@@ -1,0 +1,1126 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .bold {
+            font-family: 'Staatliches', sans-serif;
+        }
+        .country-flag {
+            height: 18px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .pinned-participant .pinned-participant-content,
+        .pinned-participant .hide-pinned {
+            display: none;
+        }
+        .pinned-participant.active .pinned-participant-content,
+        .pinned-participant.active .hide-pinned {
+            display: block;
+        }
+        .pinned-participant.active .show-pinned {
+            display: none;
+        }
+        .accordion-toggle.active .accordion-arrow {
+            transform: rotate(180deg);
+        }
+        button,
+        [role='button'] {
+            cursor: pointer;
+        }
+        button:disabled,
+        [role='button']:disabled {
+            cursor: default;
+        }
+        body.modal-open {
+            overflow: hidden;
+        }
+    </style>
+  </head>
+  <body>
+    <div>
+        <!-- Header -->
+        <div class="p-3 h-16 fixed left-0 right-0 bg-white top-0 z-10 border-b border-gray-200">
+            <div class="flex items-center max-w-7xl mx-auto">
+                <div class="inline-block">
+                    <img src="logo.png" class="h-8">
+                </div>
+                <div class="inline-block ml-auto">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-full border border-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                        </div>
+                        <div class="p-2 rounded-full border border-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end: Header -->
+        <div>
+            <div>
+                <div class="relative md:h-screen pt-16 flex flex-col bg-black">
+                    <div class="flex-grow relative">
+                        <img class="object-cover w-full h-full md:absolute object-center" alt="thumbnail" src="thumbnail.jpg">
+                        <div class="bg-gradient-to-t to-transparent from-black h-30 md:h-64 w-full absolute -bottom-1 left-0 right-0"></div>
+                    </div>
+                    <div class="relative bottom-0 left-0 right-0 text-white px-4 pb-4 pt-2">
+                        <div class="max-w-7xl mx-auto relative">
+                            <div class="px-3 py-1 rounded-full bg-white text-black bold inline-flex gap-2 items-center absolute -top-10 left-0">
+                                <div class="size-3 bg-red-500 rounded-full"></div>
+                                <span>Live Now</span>
+                            </div>
+                            <div class="mt-4 bold text-5xl md:text-7xl">Wonosobo Altitude Run 2025</div>
+                            <div class="mt-6 flex gap-2 max-w-full overflow-auto">
+                                <button class="rounded-full px-3 py-1 bg-white text-black text-nowrap">Trail 80K</button>
+                                <button class="rounded-full px-3 py-1 bg-gray-700 text-nowrap">Trail 50K</button>
+                                <button class="rounded-full px-3 py-1 bg-gray-700 text-nowrap">Trail 30K</button>
+                                <button class="rounded-full px-3 py-1 bg-gray-700 text-nowrap">Trail 15K</button>
+                            </div>
+                            <div class="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+                                <div>
+                                    <div>Date</div>
+                                    <div class="bold text-3xl">APR 12, 2025</div>
+                                </div>
+                                <div>
+                                    <div>Time</div>
+                                    <div class="bold text-3xl">04:00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!-- Filter -->
+                    <div class="px-4 sticky top-16 bg-white pt-4 border-b border-gray-200 z-10">
+                        <div class="max-w-7xl mx-auto md:flex items-center justify-between">
+                            <div class="md:mb-4 mb-3">
+                                <input class="bg-gray-50 py-1.5 px-3 border border-gray-200 rounded-full w-full leading-5" placeholder="Search runner">
+                            </div>
+                            <div class="mb-4 grid grid-cols-2 gap-3">
+                                <div>
+                                    <select class="py-1.5 px-3 border border-gray-200 rounded-full w-full leading-5">
+                                        <option>Overall</option>
+                                        <option>Open</option>
+                                        <option>Student</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <select class="py-1.5 px-3 border border-gray-200 rounded-full w-full leading-5">
+                                        <option>All Gender</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End: Filter -->
+                    <div class="max-w-7xl mx-auto">
+                        <div class="hidden md:block">
+                            <div class="text-sm uppercase grid grid-cols-9 bg-gray-50 px-4 py-1 gap-2 py-3 border-t border-gray-100">
+                                <div class="col-span-2">Rank</div>
+                                <div class="col-span-2">Team</div>
+                                <div>Gender</div>
+                                <div class="col-span-2">Segment</div>
+                                <div class="col-span-2"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- row group -->
+                            <div>
+                                <div class="accordion-toggle cursor-pointer md:grid md:grid-cols-9 gap-2 px-4 py-4 relative border-t border-gray-100" data-target="group-1">
+                                    <div class="col-span-4 flex md:grid grid-cols-4 md:gap-2 mr-34 md:mr-0 mt-1 md:mt-0">
+                                        <div class="col-span-2 md:flex inline-block">
+                                            <div>
+                                                <div class="leading-2 p-2.5 rounded-full bg-gray-300 inline-block mr-3">1</div>
+                                            </div>
+                                            <div class="hidden md:inline-block">
+                                                <div class="flex justify-between gap-4">
+                                                    <div class="text-gray-500">Overall</div>
+                                                    <div class="font-semibold">1</div>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <div class="text-gray-500">Gender</div>
+                                                    <div class="font-semibold">1</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-2 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                            Team-1
+                                        </div>
+                                    </div>
+                                    <div>Male</div>
+                                    <div class="col-span-2">Segment 1</div>
+                                    <div class="col-span-2 float-right">
+                                        <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                            <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                </svg>
+                                                On Race
+                                            </div>
+                                            <button class="pin-btn cursor-pointer rounded-full p-2.5 border border-gray-200 bg-white">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
+                                                    <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
+                                                </svg>
+                                            </button>
+                                            <div class="p-2 accordion-arrow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: none;" id="group-1" class="bg-gray-50 border-t border-gray-100">
+                                    <div class="">
+                                        <div class="hidden md:block">
+                                            <div class="text-sm uppercase text-gray-600 grid grid-cols-12 bg-gray-50 px-4 py-1 gap-2 py-2">
+                                                <div>Segment</div>
+                                                <div class="col-span-3">Runner</div>
+                                                <div>BIB</div>
+                                                <div>Country</div>
+                                                <div>Gender</div>
+                                                <div class="col-span-2">Last Checkpoint</div>
+                                                <div class="col-span-2"></div>
+                                            </div>
+                                        </div>
+                                        <!-- item -->
+                                        <div class="item cursor-pointer p-4 block md:grid md:grid-cols-12 gap-2 relative border-b border-gray-100">
+                                            <div class="col-span-4 flex md:grid grid-cols-4 mr-34 md:mr-0 mt-1 md:mt-0">
+                                                <div class="md:flex inline-block">1</div>
+                                                <div class="col-span-3 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                                    Rahmat Septiyanto 
+                                                </div>
+                                            </div>
+                                            <div class="col-span-3 md:grid grid-cols-3 flex gap-2 mt-4 md:mt-0">
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 inline-block size-fit bg-white">
+                                                    <span class="text-gray-500">BIB</span>
+                                                    1234
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                                    ID
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                                    </svg>
+                                                    Male
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
+                                                    <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
+                                                    <div>
+                                                        <div class="font-semibold md:block inline-block">
+                                                            KM 10 Perantunan
+                                                            <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">
+                                                            <div class="inline-block">Apr 12, 2025</div>
+                                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">22:00:00</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2 float-right">
+                                                <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                                    <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        On Race
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end:item -->
+                                         <!-- item -->
+                                        <div class="item cursor-pointer p-4 block md:grid md:grid-cols-12 gap-2 relative">
+                                            <div class="col-span-4 flex md:grid grid-cols-4 mr-34 md:mr-0 mt-1 md:mt-0">
+                                                <div class="md:flex inline-block">2</div>
+                                                <div class="col-span-3 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                                    Rahmat Septiyanto 
+                                                </div>
+                                            </div>
+                                            <div class="col-span-3 md:grid grid-cols-3 flex gap-2 mt-4 md:mt-0">
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 inline-block size-fit bg-white">
+                                                    <span class="text-gray-500">BIB</span>
+                                                    1234
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                                    ID
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                                    </svg>
+                                                    Male
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
+                                                    <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
+                                                    <div>
+                                                        <div class="font-semibold md:block inline-block">
+                                                            KM 10 Perantunan
+                                                            <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">
+                                                            <div class="inline-block">Apr 12, 2025</div>
+                                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">22:00:00</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2 float-right">
+                                                <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                                    <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        On Race
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end:item -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end: row group -->
+                             <!-- row group -->
+                            <div>
+                                <div class="accordion-toggle cursor-pointer md:grid md:grid-cols-9 gap-2 px-4 py-4 relative border-t border-gray-100" data-target="group-2">
+                                    <div class="col-span-4 flex md:grid grid-cols-4 md:gap-2 mr-34 md:mr-0 mt-1 md:mt-0">
+                                        <div class="col-span-2 md:flex inline-block">
+                                            <div>
+                                                <div class="leading-2 p-2.5 rounded-full bg-gray-300 inline-block mr-3">2</div>
+                                            </div>
+                                            <div class="hidden md:inline-block">
+                                                <div class="flex justify-between gap-4">
+                                                    <div class="text-gray-500">Overall</div>
+                                                    <div class="font-semibold">1</div>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <div class="text-gray-500">Gender</div>
+                                                    <div class="font-semibold">1</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-2 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                            Team-2
+                                        </div>
+                                    </div>
+                                    <div>Male</div>
+                                    <div class="col-span-2">Segment 1</div>
+                                    <div class="col-span-2 float-right">
+                                        <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                            <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                </svg>
+                                                On Race
+                                            </div>
+                                            <button class="pin-btn cursor-pointer rounded-full p-2.5 border border-gray-200 bg-white">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
+                                                    <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
+                                                </svg>
+                                            </button>
+                                            <div class="p-2 accordion-arrow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: none;" id="group-2" class="bg-gray-50 border-t border-gray-100">
+                                    <div class="">
+                                        <div class="hidden md:block">
+                                            <div class="text-sm uppercase text-gray-600 grid grid-cols-12 bg-gray-50 px-4 py-1 gap-2 py-2">
+                                                <div>Segment</div>
+                                                <div class="col-span-3">Runner</div>
+                                                <div>BIB</div>
+                                                <div>Country</div>
+                                                <div>Gender</div>
+                                                <div class="col-span-2">Last Checkpoint</div>
+                                                <div class="col-span-2"></div>
+                                            </div>
+                                        </div>
+                                        <!-- item -->
+                                        <div class="item cursor-pointer p-4 block md:grid md:grid-cols-12 gap-2 relative border-b border-gray-100">
+                                            <div class="col-span-4 flex md:grid grid-cols-4 mr-34 md:mr-0 mt-1 md:mt-0">
+                                                <div class="md:flex inline-block">1</div>
+                                                <div class="col-span-3 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                                    Rahmat Septiyanto 
+                                                </div>
+                                            </div>
+                                            <div class="col-span-3 md:grid grid-cols-3 flex gap-2 mt-4 md:mt-0">
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 inline-block size-fit bg-white">
+                                                    <span class="text-gray-500">BIB</span>
+                                                    1234
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                                    ID
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                                    </svg>
+                                                    Male
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
+                                                    <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
+                                                    <div>
+                                                        <div class="font-semibold md:block inline-block">
+                                                            KM 10 Perantunan
+                                                            <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">
+                                                            <div class="inline-block">Apr 12, 2025</div>
+                                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">22:00:00</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2 float-right">
+                                                <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                                    <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        On Race
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end:item -->
+                                         <!-- item -->
+                                        <div class="item cursor-pointer p-4 block md:grid md:grid-cols-12 gap-2 relative">
+                                            <div class="col-span-4 flex md:grid grid-cols-4 mr-34 md:mr-0 mt-1 md:mt-0">
+                                                <div class="md:flex inline-block">2</div>
+                                                <div class="col-span-3 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                                    Rahmat Septiyanto 
+                                                </div>
+                                            </div>
+                                            <div class="col-span-3 md:grid grid-cols-3 flex gap-2 mt-4 md:mt-0">
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 inline-block size-fit bg-white">
+                                                    <span class="text-gray-500">BIB</span>
+                                                    1234
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                                    ID
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                                    </svg>
+                                                    Male
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
+                                                    <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
+                                                    <div>
+                                                        <div class="font-semibold md:block inline-block">
+                                                            KM 10 Perantunan
+                                                            <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">
+                                                            <div class="inline-block">Apr 12, 2025</div>
+                                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">22:00:00</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2 float-right">
+                                                <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                                    <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        On Race
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end:item -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end: row group -->
+                             <!-- row group -->
+                            <div>
+                                <div class="accordion-toggle cursor-pointer md:grid md:grid-cols-9 gap-2 px-4 py-4 relative border-t border-gray-100" data-target="group-3">
+                                    <div class="col-span-4 flex md:grid grid-cols-4 md:gap-2 mr-34 md:mr-0 mt-1 md:mt-0">
+                                        <div class="col-span-2 md:flex inline-block">
+                                            <div>
+                                                <div class="leading-2 p-2.5 rounded-full bg-gray-300 inline-block mr-3">3</div>
+                                            </div>
+                                            <div class="hidden md:inline-block">
+                                                <div class="flex justify-between gap-4">
+                                                    <div class="text-gray-500">Overall</div>
+                                                    <div class="font-semibold">1</div>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <div class="text-gray-500">Gender</div>
+                                                    <div class="font-semibold">1</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-2 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                            Team-3
+                                        </div>
+                                    </div>
+                                    <div>Male</div>
+                                    <div class="col-span-2">Segment 1</div>
+                                    <div class="col-span-2 float-right">
+                                        <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                            <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                </svg>
+                                                On Race
+                                            </div>
+                                            <button class="pin-btn cursor-pointer rounded-full p-2.5 border border-gray-200 bg-white">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
+                                                    <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
+                                                </svg>
+                                            </button>
+                                            <div class="p-2 accordion-arrow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: none;" id="group-3" class="bg-gray-50 border-t border-gray-100">
+                                    <div class="">
+                                        <div class="hidden md:block">
+                                            <div class="text-sm uppercase text-gray-600 grid grid-cols-12 bg-gray-50 px-4 py-1 gap-2 py-2">
+                                                <div>Segment</div>
+                                                <div class="col-span-3">Runner</div>
+                                                <div>BIB</div>
+                                                <div>Country</div>
+                                                <div>Gender</div>
+                                                <div class="col-span-2">Last Checkpoint</div>
+                                                <div class="col-span-2"></div>
+                                            </div>
+                                        </div>
+                                        <!-- item -->
+                                        <div class="item cursor-pointer p-4 block md:grid md:grid-cols-12 gap-2 relative border-b border-gray-100">
+                                            <div class="col-span-4 flex md:grid grid-cols-4 mr-34 md:mr-0 mt-1 md:mt-0">
+                                                <div class="md:flex inline-block">1</div>
+                                                <div class="col-span-3 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                                    Rahmat Septiyanto 
+                                                </div>
+                                            </div>
+                                            <div class="col-span-3 md:grid grid-cols-3 flex gap-2 mt-4 md:mt-0">
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 inline-block size-fit bg-white">
+                                                    <span class="text-gray-500">BIB</span>
+                                                    1234
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                                    ID
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                                    </svg>
+                                                    Male
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
+                                                    <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
+                                                    <div>
+                                                        <div class="font-semibold md:block inline-block">
+                                                            KM 10 Perantunan
+                                                            <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">
+                                                            <div class="inline-block">Apr 12, 2025</div>
+                                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">22:00:00</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2 float-right">
+                                                <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                                    <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        On Race
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end:item -->
+                                         <!-- item -->
+                                        <div class="item cursor-pointer p-4 block md:grid md:grid-cols-12 gap-2 relative">
+                                            <div class="col-span-4 flex md:grid grid-cols-4 mr-34 md:mr-0 mt-1 md:mt-0">
+                                                <div class="md:flex inline-block">2</div>
+                                                <div class="col-span-3 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                                    Rahmat Septiyanto 
+                                                </div>
+                                            </div>
+                                            <div class="col-span-3 md:grid grid-cols-3 flex gap-2 mt-4 md:mt-0">
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 inline-block size-fit bg-white">
+                                                    <span class="text-gray-500">BIB</span>
+                                                    1234
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                                    ID
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                                    </svg>
+                                                    Male
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
+                                                    <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
+                                                    <div>
+                                                        <div class="font-semibold md:block inline-block">
+                                                            KM 10 Perantunan
+                                                            <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">
+                                                            <div class="inline-block">Apr 12, 2025</div>
+                                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">22:00:00</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2 float-right">
+                                                <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                                    <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        On Race
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end:item -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end: row group -->
+                             <!-- row group -->
+                            <div>
+                                <div class="accordion-toggle cursor-pointer md:grid md:grid-cols-9 gap-2 px-4 py-4 relative border-t border-gray-100" data-target="group-4">
+                                    <div class="col-span-4 flex md:grid grid-cols-4 md:gap-2 mr-34 md:mr-0 mt-1 md:mt-0">
+                                        <div class="col-span-2 md:flex inline-block">
+                                            <div>
+                                                <div class="leading-2 p-2.5 rounded-full bg-gray-300 inline-block mr-3">4</div>
+                                            </div>
+                                            <div class="hidden md:inline-block">
+                                                <div class="flex justify-between gap-4">
+                                                    <div class="text-gray-500">Overall</div>
+                                                    <div class="font-semibold">1</div>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <div class="text-gray-500">Gender</div>
+                                                    <div class="font-semibold">1</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-2 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                            Team-4
+                                        </div>
+                                    </div>
+                                    <div>Male</div>
+                                    <div class="col-span-2">Segment 1</div>
+                                    <div class="col-span-2 float-right">
+                                        <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                            <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                </svg>
+                                                On Race
+                                            </div>
+                                            <button class="pin-btn cursor-pointer rounded-full p-2.5 border border-gray-200 bg-white">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
+                                                    <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
+                                                </svg>
+                                            </button>
+                                            <div class="p-2 accordion-arrow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: none;" id="group-4" class="bg-gray-50 border-t border-gray-100">
+                                    <div class="">
+                                        <div class="hidden md:block">
+                                            <div class="text-sm uppercase text-gray-600 grid grid-cols-12 bg-gray-50 px-4 py-1 gap-2 py-2">
+                                                <div>Segment</div>
+                                                <div class="col-span-3">Runner</div>
+                                                <div>BIB</div>
+                                                <div>Country</div>
+                                                <div>Gender</div>
+                                                <div class="col-span-2">Last Checkpoint</div>
+                                                <div class="col-span-2"></div>
+                                            </div>
+                                        </div>
+                                        <!-- item -->
+                                        <div class="item cursor-pointer p-4 block md:grid md:grid-cols-12 gap-2 relative border-b border-gray-100">
+                                            <div class="col-span-4 flex md:grid grid-cols-4 mr-34 md:mr-0 mt-1 md:mt-0">
+                                                <div class="md:flex inline-block">1</div>
+                                                <div class="col-span-3 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                                    Rahmat Septiyanto 
+                                                </div>
+                                            </div>
+                                            <div class="col-span-3 md:grid grid-cols-3 flex gap-2 mt-4 md:mt-0">
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 inline-block size-fit bg-white">
+                                                    <span class="text-gray-500">BIB</span>
+                                                    1234
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                                    ID
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                                    </svg>
+                                                    Male
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
+                                                    <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
+                                                    <div>
+                                                        <div class="font-semibold md:block inline-block">
+                                                            KM 10 Perantunan
+                                                            <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">
+                                                            <div class="inline-block">Apr 12, 2025</div>
+                                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">22:00:00</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2 float-right">
+                                                <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                                    <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        On Race
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end:item -->
+                                         <!-- item -->
+                                        <div class="item cursor-pointer p-4 block md:grid md:grid-cols-12 gap-2 relative">
+                                            <div class="col-span-4 flex md:grid grid-cols-4 mr-34 md:mr-0 mt-1 md:mt-0">
+                                                <div class="md:flex inline-block">2</div>
+                                                <div class="col-span-3 font-bold inline-block text-md mt-0.5 md:mt-0">
+                                                    Rahmat Septiyanto 
+                                                </div>
+                                            </div>
+                                            <div class="col-span-3 md:grid grid-cols-3 flex gap-2 mt-4 md:mt-0">
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 inline-block size-fit bg-white">
+                                                    <span class="text-gray-500">BIB</span>
+                                                    1234
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                                    ID
+                                                </div>
+                                                <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                                    </svg>
+                                                    Male
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="bg-white md:bg-transparent p-3 md:p-0 rounded-lg border border-gray-200 text-sm md:border-0 leading-4 md:leading-5">
+                                                    <div class="text-gray-500 md:hidden mb-2">Last Checkpoint</div>
+                                                    <div>
+                                                        <div class="font-semibold md:block inline-block">
+                                                            KM 10 Perantunan
+                                                            <div class="w-[1px] md:hidden inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">
+                                                            <div class="inline-block">Apr 12, 2025</div>
+                                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
+                                                        </div>
+                                                        <div class="font-semibold md:font-normal inline-block">22:00:00</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2 float-right">
+                                                <div class="flex gap-2 justify-end absolute top-4 right-4 items-center">
+                                                    <div class="size-fit rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        On Race
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end:item -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end: row group -->
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="p-4 border-t border-gray-200">
+                        <div class="flex gap-2 mx-auto justify-center">
+                            <a href="#" class="size-9 rounded-full text-center flex items-center justify-center p-2.5 bg-yellow-200">
+                                1
+                            </a>
+                            <a href="#" class="size-9 rounded-full text-center flex items-center justify-center p-2.5">
+                                2
+                            </a>
+                            <a href="#" class="size-9 rounded-full text-center flex items-center justify-center p-2.5">
+                                ...</a>
+                            <a href="#" class="size-9 rounded-full text-center flex items-center justify-center p-2.5">
+                                8
+                            </a>
+                            <a href="#" class="size-9 rounded-full text-center flex items-center justify-center p-2.5">
+                                9
+                            </a>
+                            <a href="#" class="size-9 rounded-full text-center flex items-center justify-center p-2.5 border border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- end: Pagination -->
+                    <!-- Modal Detail  -->
+                    <div id="participant-detail" class="hidden fixed inset-0 top-0 left-0 right-0 bottom-0 z-50 bg-black/50 overflow-y-auto">
+                        <div class="flex items-center min-h-full justify-center">
+                            <div class="bg-white rounded-xl shadow-lg w-full max-w-2xl p-4 relative mx-4 my-12">
+                                <button class="modal-close absolute -top-10 right-0 text-gray-500 hover:text-gray-700 text-xl p-2 bg-white rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"></path>
+                                    </svg>
+                                </button>
+                                <div class="rounded-full flex gap-1 items-center px-3 py-1 text-nowrap tex-xs text-blue-600 bg-blue-100 bold float-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
+                                    </svg>
+                                    On Race
+                                </div>
+                                <h2 class="text-3xl bold">Rahmat Septiyanto Nugroho</h2>
+                                <div class="flex gap-2 mt-4 flex-wrap">
+                                    <div class="text-sm font-semibold rounded-full py-1 px-2 border border-gray-200 inline-block size-fit bg-white">
+                                        OPEN
+                                    </div>
+                                    <div class="text-sm rounded-full py-1 px-2 border border-gray-200 inline-block size-fit bg-white">
+                                        <span class="text-gray-500">BIB</span>
+                                        1234
+                                    </div>
+                                    <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                        <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                        ID
+                                    </div>
+                                    <div class="text-sm rounded-full py-1 px-2 border border-gray-200 flex items-center gap-2 size-fit bg-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                        </svg>
+                                        Male
+                                    </div>
+                                </div>
+                                <div class="mt-4 rounded-xl p-3 border border-gray-200">
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div class="md:text-center text-sm">
+                                            <div class="text-gray-700">Category</div>
+                                            <div class="bold text-2xl">50K</div>
+                                        </div>
+                                        <div class="md:text-center">
+                                            <div class="text-gray-700 text-sm">Time</div>
+                                            <div class="bold text-2xl">15:01:00</div>
+                                        </div>
+                                    </div>
+                                    <div class="h-[1px] bg-gray-200 my-3 hidden md:block"></div>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3">
+                                        <div class="md:text-center">
+                                            <div class="text-gray-700 text-sm">Overall</div>
+                                            <div class="bold text-2xl">1</div>
+                                        </div>
+                                        <div class="md:text-center">
+                                            <div class="text-gray-700">Gender Rank</div>
+                                            <div class="bold text-2xl">1</div>
+                                        </div>
+                                        <div class="md:text-center">
+                                            <div class="text-gray-700 text-sm">Sub. Rank</div>
+                                            <div class="bold text-2xl">1</div>
+                                        </div>
+                                        <div class="md:text-center">
+                                            <div class="text-gray-700 text-sm">Sub. Gender Rank</div>
+                                            <div class="bold text-2xl">1</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 rounded-xl p-3 border border-gray-200">
+                                    <button class="accordion-toggle flex items-center w-full" data-target="checkpoint-content">
+                                        <div class="flex-grow text-left">
+                                            <div class="bold text-2xl checkpoint-title">Last Checkpoint</div>
+                                        </div>
+                                        <div class="p-2 accordion-arrow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div class="text-sm text-gray-700 checkpoint-desc">
+                                        <div class="font-semibold inline-block">
+                                            KM 10 Perantunan
+                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
+                                        </div>
+                                        <div class="font-semibold inline-block">
+                                            <div class="inline-block">Apr 12, 2025</div>
+                                            <div class="w-[1px] inline-block h-3 mx-1 bg-gray-300"></div>
+                                        </div>
+                                        <div class="font-semibold inline-block">22:00:00</div>
+                                    </div>
+                                    <div style="display: none;" id="checkpoint-content">
+                                        <div class="flex flex-col mt-4 justify-center leading-4">
+                                            <div class="flex justify-center h-16">
+                                                <div class="size-14 grow text-right text-gray-600 text-sm">
+                                                    <div>Apr 12, 2025</div>
+                                                    <div>22:00:02</div>
+                                                </div>
+                                                <div class="grow-0 mx-4 flex flex-col items-center">
+                                                    <div>
+                                                        <div class="size-4 bg-green-500 rounded-full border-2 border-white shadow"></div>
+                                                    </div>
+                                                    <div class="w-[1px] h-full bg-gray-300"></div>
+                                                </div>
+                                                <div class="size-14 grow">Start</div>
+                                            </div>
+                                            <div class="flex justify-center h-16">
+                                                <div class="size-14 grow text-right text-gray-600 text-sm">
+                                                    <div>Apr 12, 2025</div>
+                                                    <div>22:00:02</div>
+                                                </div>
+                                                <div class="grow-0 mx-4 flex flex-col items-center">
+                                                    <div>
+                                                        <div class="size-4 bg-green-500 rounded-full border-2 border-white shadow"></div>
+                                                    </div>
+                                                    <div class="w-[1px] h-full bg-gray-300"></div>
+                                                </div>
+                                                <div class="grow size-14">Zanzibar</div>
+                                            </div>
+                                            <div class="flex justify-center h-16">
+                                                <div class="size-14 grow text-right text-gray-600 text-sm">
+                                                    <div>Apr 12, 2025</div>
+                                                    <div>22:00:02</div>
+                                                </div>
+                                                <div class="grow-0 mx-4 flex flex-col items-center">
+                                                    <div>
+                                                        <div class="size-4 bg-green-500 rounded-full border-2 border-white shadow"></div>
+                                                    </div>
+                                                    <div class="w-[1px] h-full bg-gray-300"></div>
+                                                </div>
+                                                <div class="grow size-14">Perantunan</div>
+                                            </div>
+                                            <div class="flex justify-center h-16">
+                                                <div class="size-14 grow text-right text-gray-600 text-sm">
+                                                    <div class="mb-2">-</div>
+                                                    <div></div>
+                                                </div>
+                                                <div class="grow-0 mx-4 flex flex-col items-center">
+                                                    <div>
+                                                        <div class="size-4 bg-gray-300 rounded-full border-2 border-white shadow"></div>
+                                                    </div>
+                                                    <div class="w-[1px] h-full bg-gray-300 hidden"></div>
+                                                </div>
+                                                <div class="grow size-14">Finish</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: Modal Detail -->
+                    <!-- Pinned -->
+                    <div class="fixed bottom-4 right-4 pinned-participant z-12 size-fit">
+                        <div class="pinned-participant-content pl-4">
+                            <div class="pinned-participant-list">
+                                <div class="bg-white rounded-lg flex items-center gap-3 px-3 py-2 text-sm border border-gray-200 mb-1 shadow-lg">
+                                    <div class="flex gap-3 items-center">
+                                        <div class="pr-3 border-r border-gray-300 font-semibold">1</div>
+                                        <div class="font-semibold">Fajar Nugroho Susilo bambang Yudoyono</div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                        </svg>
+                                        Female
+                                    </div>
+                                    <div class="flex-none">
+                                        <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                    </div>
+                                    <div>
+                                        <div class="rounded-full p-2 border border-gray-200 bg-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
+                                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-lg flex items-center gap-3 px-3 py-2 text-sm border border-gray-200 mb-1 shadow-lg">
+                                    <div class="flex gap-3 items-center">
+                                        <div class="pr-3 border-r border-gray-300 font-semibold">2</div>
+                                        <div class="font-semibold">Fajar Nugroho Susilo bambang Yudoyono</div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                        </svg>
+                                        Female
+                                    </div>
+                                    <div class="flex-none">
+                                        <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                    </div>
+                                    <div>
+                                        <div class="rounded-full p-2 border border-gray-200 bg-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
+                                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-lg flex items-center gap-3 px-3 py-2 text-sm border border-gray-200 mb-1 shadow-lg">
+                                    <div class="flex gap-3 items-center">
+                                        <div class="pr-3 border-r border-gray-300 font-semibold">3</div>
+                                        <div class="font-semibold">Fajar Nugroho Susilo bambang Yudoyono</div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"></path>
+                                        </svg>
+                                        Female
+                                    </div>
+                                    <div class="flex-none">
+                                        <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" class="country-flag">
+                                    </div>
+                                    <div>
+                                        <div class="rounded-full p-2 border border-gray-200 bg-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
+                                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="show-pinned pinned-toggle p-2.5 shadow-lg rounded-full border border-gray-200 bg-black text-white relative w-fit float-right mt-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
+                                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
+                            </svg>
+                            <div class="absolute -right-2 -top-2 bg-yellow-500 text-center rounded-full text-xs p-[6px] leading-1.5 text-black">
+                                3
+                            </div>
+                        </button>
+                        <div class="hide-pinned mt-3">
+                            <button class="pinned-toggle p-2.5 shadow-lg rounded-full border border-gray-200 bg-white relative w-fit float-right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                                </svg>
+                            </button>
+                            <div class="w-fit float-right mr-3 mt-1">
+                                <div class="px-2 py-1 bg-yellow-500 text-white text-xs rounded-full shadow-lg">You only be able to pin 3 runners.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: pinned -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(function() {
+            $('.pinned-participant .pinned-toggle').on('click', () => {
+                $('.pinned-participant').toggleClass('active');
+            })
+
+            $('.accordion-toggle').on('click', (event) => {
+                const current = $(event.currentTarget)
+                const target = current.data('target')
+                const active = current.hasClass('active')
+                if (!active) {
+                    $(`#${target}`).css('display', 'block').trigger('accordion.show')
+                } else {
+                    $(`#${target}`).css('display', 'none').trigger('accordion.hide')
+                }
+                current.toggleClass('active')
+            })
+
+            $('#checkpoint-content').on('accordion.show', () => {
+                $('.checkpoint-title').text('Checkpoints');
+                $('.checkpoint-desc').css('display', 'none');
+            })
+
+            $('#checkpoint-content').on('accordion.hide', () => {
+                $('.checkpoint-title').text('Last Checkpoints');
+                $('.checkpoint-desc').css('display', 'block');
+            })
+
+            $('.item').click(() => {
+                $('#participant-detail').removeClass('hidden')
+                $('#participant-detail').addClass('fixed')
+                $('body').addClass('modal-open')
+            })
+
+            $('.modal-close').click(() => {
+                $('#participant-detail').removeClass('fixed')
+                $('#participant-detail').addClass('hidden')
+                $('body').removeClass('modal-open')
+            })
+
+            $('.pin-btn').click((e) => {
+                e.stopPropagation();
+            })
+        })
+    </script>
+  </body>
+</html>
