@@ -1,0 +1,390 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+        .bold {
+            font-family: 'Staatliches', sans-serif;
+        }
+        .country-flag {
+            height: 18px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .pinned-participant .pinned-participant-content,
+        .pinned-participant .hide-pinned {
+            display: none;
+        }
+        .pinned-participant.active .pinned-participant-content,
+        .pinned-participant.active .hide-pinned {
+            display: block;
+        }
+        .pinned-participant.active .show-pinned {
+            display: none;
+        }
+        .accordion-toggle.active .accordion-arrow {
+            transform: rotate(180deg);
+        }
+        button,
+        [role='button'] {
+            cursor: pointer;
+        }
+        button:disabled,
+        [role='button']:disabled {
+            cursor: default;
+        }
+        body.modal-open {
+            overflow: hidden;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+  </head>
+  <body>
+    <div>
+        <!-- Header -->
+        <div class="p-3 h-16 fixed left-0 right-0 bg-black top-0 z-10 border-b border-black">
+            <div class="flex items-center max-w-7xl mx-auto">
+                <div class="inline-block">
+                    <img src="logo-white.png" class="h-8">
+                </div>
+                <div class="inline-block ml-auto text-white">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-full border border-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                        </div>
+                        <div class="p-2 rounded-full border border-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end: Header -->
+        <div>
+            <div class="bg-black">
+                <div class="flex flex-col justify-center h-screen md:h-fit pt-16 max-w-7xl mx-auto">
+                    <div class="md:mx-0 my-2 px-4">
+                        <div class="bold text-white text-3xl">Latest Events</div>
+                    </div>
+                    <div class="carousel w-full overflow-hidden flex flex-col h-full">
+                        <!-- Carousel Container -->
+                        <div class="carousel-content flex gap-4 px-4 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar grow">
+                            <!-- Slide 1 -->
+                            <div class="flex-shrink-0 w-full snap-center flex flex-col md:grid gap-4 grid-cols-5">
+                                <div class="col-span-3 text-white text-center text-2xl rounded-lg shadow-lg">
+                                    <img src="thumbnail-1.jpg" class="w-full object-cover object-center rounded-lg aspect-video">
+                                </div>
+                                <div class="col-span-2 flex flex-col gap-4 grow">
+                                    <div class="text-4xl text-center bold p-4 bg-yellow-300 rounded-lg grow flex items-center justify-center">
+                                        Ring of Lawu 2025
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-4 text-white">
+                                        <div class="p-4 bg-gray-800 text-center rounded-lg">
+                                            <div class="text-lg flex justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-event-fill" viewBox="0 0 16 16">
+                                                    <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5"/>
+                                                </svg>
+                                            </div>
+                                            <div class="text-sm mt-1">Date</div>
+                                            <div class="mt-3">Apr 12, 2025</div>
+                                        </div>
+                                        <div class="p-4 bg-gray-800 text-center rounded-lg">
+                                            <div class="text-lg flex justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill size-5" viewBox="0 0 16 16">
+                                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                                                </svg>
+                                            </div>
+                                            <div class="text-sm mt-1">Location</div>
+                                            <div class="mt-3">Wonosobo, Indonesia</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="flex-shrink-0 w-full snap-center flex flex-col md:grid gap-4 grid-cols-5">
+                                <div class="col-span-3 text-white text-center text-2xl rounded-lg shadow-lg">
+                                    <img src="thumbnail.jpg" class="w-full object-cover object-center rounded-lg aspect-video">
+                                </div>
+                                <div class="col-span-2 flex flex-col gap-4 grow">
+                                    <div class="text-4xl text-center bold p-4 bg-yellow-300 rounded-lg grow flex items-center justify-center">
+                                        Wonosobo Altitude Run 2025
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-4 text-white">
+                                        <div class="p-4 bg-gray-800 text-center rounded-lg">
+                                            <div class="text-lg flex justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-event-fill" viewBox="0 0 16 16">
+                                                    <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5"/>
+                                                </svg>
+                                            </div>
+                                            <div class="text-sm mt-1">Date</div>
+                                            <div class="mt-3">Apr 12, 2025</div>
+                                        </div>
+                                        <div class="p-4 bg-gray-800 text-center rounded-lg">
+                                            <div class="text-lg flex justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill size-5" viewBox="0 0 16 16">
+                                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                                                </svg>
+                                            </div>
+                                            <div class="text-sm mt-1">Location</div>
+                                            <div class="mt-3">Karanganyar, Indonesia</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="flex-shrink-0 w-full snap-center flex flex-col md:grid gap-4 grid-cols-5">
+                                <div class="col-span-3 text-white text-center text-2xl rounded-lg shadow-lg">
+                                    <img src="thumbnail-2.jpg" class="w-full object-cover object-center rounded-lg aspect-video">
+                                </div>
+                                <div class="col-span-2 flex flex-col gap-4 grow">
+                                    <div class="text-4xl text-center bold p-4 bg-yellow-300 rounded-lg grow flex items-center justify-center">
+                                        Semarang Montain Race 2025
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-4 text-white">
+                                        <div class="p-4 bg-gray-800 text-center rounded-lg">
+                                            <div class="text-lg flex justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-event-fill" viewBox="0 0 16 16">
+                                                    <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5"/>
+                                                </svg>
+                                            </div>
+                                            <div class="text-sm mt-1">Date</div>
+                                            <div class="mt-3">Apr 12, 2025 - Apr 12, 2025</div>
+                                        </div>
+                                        <div class="p-4 bg-gray-800 text-center rounded-lg">
+                                            <div class="text-lg flex justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill size-5" viewBox="0 0 16 16">
+                                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                                                </svg>
+                                            </div>
+                                            <div class="text-sm mt-1">Location</div>
+                                            <div class="mt-3">Semarang, Indonesia</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigator -->
+                        <div class="carousel-nav flex justify-center my-4 mb-8 md:mb-4 space-x-2">
+                            <button class="carousel-nav-item w-8 h-2 rounded-full bg-gray-500" id="nav-0"></button>
+                            <button class="carousel-nav-item w-8 h-2 rounded-full bg-gray-500" id="nav-1"></button>
+                            <button class="carousel-nav-item w-8 h-2 rounded-full bg-gray-500" id="nav-2"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-4 max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row rounded-lg mx-4 mb-4 border border-gray-200 overflow-hidden">
+                    <div>
+                        <img src="thumbnail-1.jpg" class="w-full object-cover object-center md:rounded-tr-0 aspect-video md:max-w-xs">
+                    </div>
+                    <div class="p-4 rounded-r-lg grow flex flex-col gap-4">
+                        <div class="bold text-2xl">
+                            Siksorogo Ring of Lawu 2025
+                        </div>
+                        <div class="md:p-4 rounded-lg md:bg-gray-100 flex flex-col md:flex-row gap-2 md:gap-8 mt-auto">
+                            <div>
+                                <div class="text-sm text-gray-500">Date</div>
+                                <div>Apr 12, 2025 - Apr 12, 2025</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Location</div>
+                                <div>Wonosobo, Indonesia</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Status</div>
+                                <div class="px-3 py-1 border border-gray-200 rounded-full bg-white text-black bold inline-flex gap-2 items-center mt-1">
+                                    <div class="size-3 bg-orange-500 rounded-full"></div>
+                                    <span>Result Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row rounded-lg mx-4 mb-4 border border-gray-200 overflow-hidden">
+                    <div>
+                        <img src="thumbnail.jpg" class="w-full object-cover object-center r md:rounded-tr-0spect-video md:max-w-xs">
+                    </div>
+                    <div class="p-4 rounded-r-lg grow flex flex-col gap-4">
+                        <div class="bold text-2xl">
+                            Wonosobo Altitude Run 2025
+                        </div>
+                        <div class="md:p-4 rounded-lg md:bg-gray-100 flex flex-col md:flex-row gap-2 md:gap-8 mt-auto">
+                            <div>
+                                <div class="text-sm text-gray-500">Date</div>
+                                <div>Apr 12, 2025 - Apr 12, 2025</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Location</div>
+                                <div>Wonosobo, Indonesia</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Status</div>
+                                <div class="px-3 py-1 border border-gray-200 rounded-full bg-white text-black bold inline-flex gap-2 items-center mt-1">
+                                    <div class="size-3 bg-orange-500 rounded-full"></div>
+                                    <span>Result Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row rounded-lg mx-4 mb-4 border border-gray-200 overflow-hidden">
+                    <div>
+                        <img src="thumbnail-2.jpg" class="w-full object-cover object-center md:rounded-tr-0 aspect-video md:max-w-xs">
+                    </div>
+                    <div class="p-4 rounded-r-lg grow flex flex-col gap-4">
+                        <div class="bold text-2xl">
+                            Wonosobo Altitude Run 2025
+                        </div>
+                        <div class="md:p-4 rounded-lg md:bg-gray-100 flex flex-col md:flex-row gap-2 md:gap-8 mt-auto">
+                            <div>
+                                <div class="text-sm text-gray-500">Date</div>
+                                <div>Apr 12, 2025 - Apr 12, 2025</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Location</div>
+                                <div>Wonosobo, Indonesia</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Status</div>
+                                <div class="px-3 py-1 border border-gray-200 rounded-full bg-white text-black bold inline-flex gap-2 items-center mt-1">
+                                    <div class="size-3 bg-orange-500 rounded-full"></div>
+                                    <span>Result Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pagination -->
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex gap-3 mx-auto justify-center">
+                    <a href="#" class="size-8 rounded-full text-center flex items-center justify-center p-2 bg-yellow-200">
+                        1
+                    </a>
+                    <a href="#" class="size-8 rounded-full text-center flex items-center justify-center p-2">
+                        2
+                    </a>
+                    <a href="#" class="size-8 rounded-full text-center flex items-center justify-center p-2">
+                        ...</a>
+                    <a href="#" class="size-8 rounded-full text-center flex items-center justify-center p-2">
+                        8
+                    </a>
+                    <a href="#" class="size-8 rounded-full text-center flex items-center justify-center p-2">
+                        9
+                    </a>
+                    <a href="#" class="size-8 rounded-full text-center flex items-center justify-center p-2 border border-gray-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <!-- end: Pagination -->
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(function() {
+            $('.pinned-participant .pinned-toggle').on('click', () => {
+                $('.pinned-participant').toggleClass('active');
+            })
+
+            $('.accordion-toggle').on('click', (event) => {
+                const current = $(event.currentTarget)
+                const target = current.data('target')
+                const active = current.hasClass('active')
+                if (!active) {
+                    $(`#${target}`).css('display', 'block').trigger('accordion.show')
+                } else {
+                    $(`#${target}`).css('display', 'none').trigger('accordion.hide')
+                }
+                current.toggleClass('active')
+            })
+
+            $('#checkpoint-content').on('accordion.show', () => {
+                $('.checkpoint-title').text('Checkpoints');
+                $('.checkpoint-desc').css('display', 'none');
+            })
+
+            $('#checkpoint-content').on('accordion.hide', () => {
+                $('.checkpoint-title').text('Checkpoints');
+                $('.checkpoint-desc').css('display', 'block');
+            })
+
+            $('.item').click(() => {
+                $('#participant-detail').removeClass('hidden')
+                $('#participant-detail').addClass('fixed')
+                $('body').addClass('modal-open')
+            })
+
+            $('.modal-close').click(() => {
+                $('#participant-detail').removeClass('fixed')
+                $('#participant-detail').addClass('hidden')
+                $('body').removeClass('modal-open')
+            })
+
+            $('.pin-btn').click((e) => {
+                e.stopPropagation();
+            })
+        })
+    </script>
+    <script>
+        $(() => {
+            function carousel($element) {
+                const $content = $($element).find('.carousel-content');
+                const $nav = $($element).find('.carousel-nav .carousel-nav-item');
+
+                function updateIndicator() {
+                    const scrollLeft = $content.scrollLeft();
+                    const width = $content.width();
+                    const index = Math.round(scrollLeft / width);
+
+                    $nav.each(function (i) {
+                        $(this).toggleClass('bg-white', i == index);
+                        $(this).toggleClass('bg-gray-500', i != index);
+                        $(this).toggleClass('w-14', i == index);
+                        $(this).toggleClass('w-8', i != index);
+                    });
+                }
+
+                function scrollToSlide(index) {
+                    const width = $content.width();
+                    $content.animate({ scrollLeft: width * index }, 100);
+                }
+
+                $nav.each((index, elm) => {
+                    $(elm).on('click', function () {
+                        scrollToSlide(index);
+                    });
+                })
+    
+                $content.on('scroll', () => {
+                    updateIndicator()
+                })
+
+                updateIndicator()
+            }
+
+            carousel('.carousel')
+        })
+    </script>
+  </body>
+</html>
